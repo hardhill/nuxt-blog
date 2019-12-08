@@ -16,7 +16,8 @@ import AppAside from '@/components/admin/Aside'
 export default {
     components:{
         AppAside
-    }
+    },
+   
 }
 </script>
 

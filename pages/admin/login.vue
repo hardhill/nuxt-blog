@@ -14,6 +14,7 @@
     </el-form>
   </el-card>
 </template>
+
 <script>
 export default {
   layout: "empty",
@@ -42,9 +43,32 @@ export default {
       }
     };
   },
+  mounted(){
+      const {message} = this.$route.query
+      if(message==='login'){
+          this.$message.info('Для начала надо авторизоваться')
+      }
+  },
   methods:{
       onSubmit(){
-          console.log('SUBmit')
+          this.$refs.form.validate(async valid=>{
+              if(valid){
+                  this.loading = true
+                  try {
+                     const formData = {
+                         login:this.controls.login,
+                         password:this.controls.password
+                     } 
+                    
+                    await this.$store.dispatch('auth/actLogin',formData)
+                    this.loading = false
+                    this.$router.push('/admin')
+                  } catch (error) {
+                      console.log(error)
+                      this.loading = false
+                  }
+              }
+          })
       }
   }
 };
