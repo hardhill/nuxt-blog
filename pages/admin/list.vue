@@ -4,36 +4,42 @@
     :data="posts"
     style="width: 100%">
     <el-table-column
-      label="Date"
-      width="180">
+      prop="title"
+      label="Название"
+    />
+    <el-table-column
+      label="Дата"
+     >
       <template slot-scope="scope">
         <i class="el-icon-time"></i>
         <span style="margin-left: 10px">{{ scope.row.date }}</span>
       </template>
     </el-table-column>
     <el-table-column
-      label="Name"
-      width="180">
+      prop="view"
+      label="Просмотров"
+    />
+    <el-table-column
+      label="Коментариев">
       <template slot-scope="scope">
-        <el-popover trigger="hover" placement="top">
-          <p>Name: {{ scope.row.name }}</p>
-          <p>Addr: {{ scope.row.address }}</p>
-          <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-          </div>
-        </el-popover>
+        <i class="el-icon-message"></i>
+        <span style="margin-left: 10px">{{ scope.row.comments.length }}</span>
       </template>
     </el-table-column>
+
     <el-table-column
-      label="Operations">
+      label="Действия">
       <template slot-scope="scope">
         <el-button
-          size="mini"
-          @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+          icon="el-icon-edit"
+          circle
+          type="primary"
+          @click="open(scope.row._id)"/>
         <el-button
-          size="mini"
+          icon="el-icon-delete"
+          circle
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+          @click="remove(scope.row._id)"/>
       </template>
     </el-table-column>
   </el-table>
@@ -46,6 +52,14 @@ export default {
      async asyncData({store}){
          const posts = await store.dispatch('post/fetchAdmin')
          return {posts}
+     },
+     methods:{
+       open(id){
+         console.log('open-',id)
+       },
+       remove(id){
+        console.log('del-',id)
+       }
      }
 }
 </script>
