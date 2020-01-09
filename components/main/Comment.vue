@@ -15,7 +15,7 @@
 
 <script>
 export default {
-    props:['comment']
+    props:['comment'] //свойство компонента
 }
 
 </script>

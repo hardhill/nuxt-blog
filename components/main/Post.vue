@@ -30,7 +30,7 @@ export default {
         openPost(){
             console.log('Open post')
             var id = 'test-id'
-            this.$router.push(`/post/${id}`)
+            this.$router.push(`/post/${id}`) //переход на конкретный пост
         }
     }
 }

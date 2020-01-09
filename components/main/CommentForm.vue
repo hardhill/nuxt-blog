@@ -8,6 +8,7 @@
       <el-input type="textarea" v-model="controls.text" resize="none" :rows="2"></el-input>
     </el-form-item>
     <el-form-item>
+      <!-- кнопка с иконкой загрузки данных -->
       <el-button type="primary" native-type="submit" round :loading="loading">Добавить комментарий</el-button>
     </el-form-item>
   </el-form>
@@ -21,7 +22,7 @@ export default {
         name: "",
         text: ""
       },
-      rules: {
+      rules: {        //правило для полей
         name: [
           {
             required: true,
@@ -68,6 +69,8 @@ export default {
               this.$message.success("Коментарий добавлен");
             }, 2000);
           } catch (e) {
+            this.loading = false;
+          }finally{
             this.loading = false;
           }
         }
